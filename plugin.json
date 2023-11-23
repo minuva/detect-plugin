@@ -1,0 +1,15 @@
+{
+    "name": "Conversation flow detection",
+    "url": "https://github.com/minuva/flowdetect-plugin",
+    "description": "Get user and agent flow labels in a conversation",
+    "main": "index.js",
+    "config": [
+        {
+            "key": "API_SERVER_URL",
+            "name": "HOSTNAME URL",
+            "type": "string",
+            "default": "https://cloud-ml-app-qnb6bcsgwa-ey.a.run.app",
+            "required": true
+        }
+    ]
+}
