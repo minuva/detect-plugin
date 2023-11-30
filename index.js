@@ -97,14 +97,23 @@ async function processEvent(event, { config, cache }) {
         event.properties = {};
     }
 
-    if (!event.properties['$dialog'] ||
-        event.properties['user_complains_or_disagrees'] ||
-        event.properties['agent_apology']
-    ) {
-        return event;
+    if (!event.properties['$dialog']){
+      return event;
     }
-    
 
+    if (
+      event.properties['user_complains_or_disagrees'] !== undefined ||
+      event.properties['agent_apology'] !== undefined
+    ) {
+
+      for (const prop of ['user_complains_or_disagrees', 'agent_apology']) {
+        if (event.properties[prop] === 0) {
+          delete event.properties[prop];
+        }
+      }
+      return event;
+    }
+  
     var dialog = event.properties['$dialog']
     dialog = JSON.parse(dialog);
     const res = await makePostRequest(fullUrl, dialog);
